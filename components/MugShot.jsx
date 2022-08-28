@@ -40,7 +40,7 @@ export default function MugShot(props) {
       <Image boxSize={"200px"} src={getPlayerMugshot({
         id: props.id,
         team: team,
-        year: 20222023,
+        year: 20212022,
       })} />
     </Link>
   )

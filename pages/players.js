@@ -12,10 +12,10 @@ export default function players() {
 
   const [teamList, setTeamList] = useState()
   const [selectedTeam, setSelectedTeam] = useState()
+  const [state, updateState] = useState()
 
   useEffect(()=>{
     axios.get("https://statsapi.web.nhl.com/api/v1/teams").then((res)=>{
-      console.log("teams query response: ", res)
       setTeamList(res.data.teams)
     })
   },[])
@@ -27,6 +27,8 @@ export default function players() {
   function handleSelect(id){
     setSelectedTeam(id)
   }
+
+
 
   if(!teamList) return
 
@@ -40,6 +42,7 @@ export default function players() {
       {teamList.map(({name, id})=>{
         return <option value={id}>{name}</option>
       })}
+      
     
     
 

@@ -41,11 +41,15 @@ export default function RenderTeam(props) {
     <Flex direction={"column"}>
       {roster.map(({ jerseyNumber, person: { fullName, id, link } }) => {
         
-        return <MugShot id={id}/>;
+        return <PlayerCard id={id}/>;
       })}
     </Flex>
   );
 }
 
 
-// THE GOAL NOW, IS TO GET ALL THE PLAYER STATS TO UPDATE.  FROM THE TEAM ARRAY, YOU CAN GRAB THE INDIVIDUAL PLAYER'S API LINK
+// There are a couple bugs, components don't rerender properly when you change your selection.
+
+//Could also work on making it so when you click back, it saves the selected team state so you dont have to re enter that info
+
+//Could spend time making profile page prettier
