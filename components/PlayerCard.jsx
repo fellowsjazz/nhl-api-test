@@ -13,59 +13,42 @@ import {
   TableCaption,
   TableContainer,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../public/nhl.png";
+import { getPlayerMugshot } from "@nhl-api/players";
+import axios from "axios";
+import Link from "next/link"
+import MugShot from "./MugShot";
+
+// To use the player card component, you need to pass these props:
+// <PlayerCard name={fullName} number={jerseyNumber} id={id} team="TOR"/>
 
 export default function PlayerCard(props) {
+ 
+ const [playerInfo, setPlayerInfo] = useState()
 
-    console.log(props)
+  useEffect(() => {
+    axios
+      .get(`https://statsapi.web.nhl.com${props.link}`)
+      .then((res) => {
+        setPlayerInfo(res.data.people[0])
+      });
+  }, []);
 
+
+
+  if (!playerInfo) return
 
   return (
+    <Link href={`/players/${props.id}`}>
     <Container bg={"whiteAlpha.400"} borderRadius="3px" py="1rem" my="1rem">
       <Flex justify="center" direction="column" align={"center"}>
-        <Image
-          src="https://assets.stickpng.com/thumbs/5a4fbb7bda2b4f099b95da15.png"
-          boxSize={"100px"}
-        />
-        <Text>{props.name}</Text>
-        <Text>{props.number}</Text>
-        <Text>Player Team</Text>
+        <MugShot id={playerInfo.id}/>
+        <Text>{playerInfo.fullName}</Text>
+        
       </Flex>
-      <TableContainer
-        borderWidth={"1px"}
-        borderColor="black"
-        borderRadius={"3px"}
-        my="10px"
-        mx="40px"
-      >
-        <Table variant={"unstyled"} size="sm">
-          <Thead>
-            <Tr>
-              <Th>Stat</Th>
-              <Th>Value</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            <Tr>
-              <Td>Goals</Td>
-              <Td isNumeric>7</Td>
-            </Tr>
-            <Tr>
-              <Td>Assists</Td>
-              <Td isNumeric>45</Td>
-            </Tr>
-            <Tr>
-              <Td>Points</Td>
-              <Td isNumeric>52</Td>
-            </Tr>
-            <Tr>
-              <Td>Shots</Td>
-              <Td isNumeric>34</Td>
-            </Tr>
-          </Tbody>
-        </Table>
-      </TableContainer>
+      
     </Container>
+    </Link>
   );
 }

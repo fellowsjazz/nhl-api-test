@@ -1188,6 +1188,11 @@
     "@react-types/shared" "3.13.0"
     "@stitches/react" "1.2.8"
 
+"@nhl-api/players@^3.1.4":
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/@nhl-api/players/-/players-3.1.4.tgz#580f225698fc967742868f3e61ce64bb67e5e817"
+  integrity sha512-c47+BhvLd6k8J3JWSXT9rvXpDHPZB1ywuECypk99ZLq5IRDCHqkWl4K1luwMcGBN6ytPsa5gdnOhWm+adn9Cjg==
+
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
   resolved "https://registry.npmjs.org/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz"

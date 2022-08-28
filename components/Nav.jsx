@@ -9,7 +9,7 @@ export default function Nav() {
       <Link href={"/"}>
         <Button size={'sm'} variant={'ghost'}>Home</Button>
       </Link>
-      <Link href={"players"}>
+      <Link href={"/players"}>
       <Button size={'sm'} variant={'ghost'}>Players</Button>
       </Link>
       </HStack>

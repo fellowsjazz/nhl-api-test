@@ -3,32 +3,49 @@ import PlayerCard from "./PlayerCard";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Flex } from "@chakra-ui/react";
+import {getPlayerMugshot} from "@nhl-api/players"
+import MugShot from "./MugShot";
 
-export default function RenderTeam() {
-  const [team, setTeam] = useState();
+export default function RenderTeam(props) {
+  const [roster, setRoster] = useState();
+  
+  console.log("Team Id received from players.js by renderTeam.jsx: ", props.teamId)
+
 
   useEffect(() => {
+    if(!props.teamId) return
     axios
-      .get("https://statsapi.web.nhl.com/api/v1/teams/10?expand=team.roster")
+      .get(`https://statsapi.web.nhl.com/api/v1/teams/${props.teamId}?expand=team.roster`)
       .then((res) => {
-        setTeam(res.data.teams[0].roster.roster);
+        console.log("res",res)
+        setRoster(res.data.teams[0].roster.roster);
       });
-  }, []);
+  }, [props.teamId]);
 
-  if (team == undefined) return;
+  useEffect(()=>{
+    console.log("Set Roster:", roster)
 
-  console.log(team);
+  },[roster])
+
+    
+
+  console.log("log of team Id",props.teamId)
+
+  if (props.teamId == undefined) return <div style={{height: "100%"}}></div>;
+
+  if (roster == undefined) return <div style={{height: "100%"}}></div>;
+
+  
 
   return (
     <Flex direction={"column"}>
-      {team.map(({ jerseyNumber, person: { fullName } }) => {
-        return <PlayerCard name={fullName} number={jerseyNumber} />;
+      {roster.map(({ jerseyNumber, person: { fullName, id, link } }) => {
+        
+        return <MugShot id={id}/>;
       })}
     </Flex>
   );
 }
 
-// team.map(({ jerseyNumber, person: { fullName } }) => {
-//     console.log("Name: ", fullName, "| Jersey: ", jerseyNumber );
-//     return <PlayerCard name={fullName} number={jerseyNumber} />
-//   });
+
+// THE GOAL NOW, IS TO GET ALL THE PLAYER STATS TO UPDATE.  FROM THE TEAM ARRAY, YOU CAN GRAB THE INDIVIDUAL PLAYER'S API LINK
