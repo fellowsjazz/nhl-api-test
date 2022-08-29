@@ -16,3 +16,7 @@ function MyApp({ Component, pageProps }) {
 }
 
 export default MyApp
+
+
+/// You were trying to working on fixing the re-render bug when user select changes, but no luck!
+//probably best to move on to building a new feature, like changing the stats year when on a player profile

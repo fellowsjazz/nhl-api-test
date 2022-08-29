@@ -21,16 +21,16 @@ export default function MugShot(props) {
 
     useEffect(()=>{
         if(!playerData) return
-        console.log(playerData)                     //gets team link to request team abbreviation for getPlayerMugshot
+                            //gets team link to request team abbreviation for getPlayerMugshot
         const {currentTeam :{link}} = playerData
         axios.get(`https://statsapi.web.nhl.com${link}`).then((res)=>{
-            console.log("team response: ", res)
+            
             setTeam(res.data.teams[0].abbreviation)
         })
     },[playerData])
 
     useEffect(()=>{
-        console.log("Team: ", team)
+       
     },[team])
 
     if(!team) return

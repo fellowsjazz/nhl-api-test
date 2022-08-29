@@ -14,8 +14,12 @@ export default function PlayerInfo(props) {
       },[])
 
       useEffect(()=>{
-        console.log("Player Info: ", playerInfo)
+      
       },[playerInfo])
+
+      useEffect(()=>{
+
+      },[props])
 
 
 if (!playerInfo) return
